@@ -3,6 +3,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.UnknownHostException;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -148,6 +149,13 @@ public class MainFrame extends JFrame {
             if(destinationAddress.isEmpty()){
                 JOptionPane.showMessageDialog(this,"Введите адрес узла-получателя",
                         "Ошибка", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            try{
+                InetAddress.getByName(destinationAddress);
+            }catch (UnknownHostException e ){
+                JOptionPane.showMessageDialog(this,"Неккоректный адрес получателя",
+                        "Ошибка",JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
