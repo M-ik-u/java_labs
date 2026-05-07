@@ -19,9 +19,7 @@ public class InstantMessenger {
         startServer();
     }
 
-    public String getSender() {
-        return sender;
-    }
+
 
     public void setSender(String sender) {
         this.sender = sender;
@@ -33,11 +31,7 @@ public class InstantMessenger {
         }
     }
 
-    public void removeMessageListener(MessageListener listener) {
-        synchronized (listeners) {
-            listeners.remove(listener);
-        }
-    }
+
 
     public void sendMessage(String destinationAddress, String message)
             throws UnknownHostException, IOException {

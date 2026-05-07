@@ -122,7 +122,7 @@ public class MainFrame extends JFrame {
         instantMessenger.addMessageListener(new MessageListener() {
             @Override
             public void messageReceived(Peer sender, String message) {
-                textAreaIncoming.append(sender.getName() + " (" + sender.getAddress() + "): " + message + "\n");
+                textAreaIncoming.append(sender.name() + " (" + sender.address() + "): " + message + "\n");
             }
         });
 

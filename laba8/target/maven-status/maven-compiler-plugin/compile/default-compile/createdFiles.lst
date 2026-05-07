@@ -1,0 +1,7 @@
+servlet/LogoutServlet.class
+entity/ChatUser.class
+entity/ChatMessage.class
+servlet/MessageListServlet.class
+servlet/NewMessageServlet.class
+servlet/ChatServlet.class
+servlet/LoginServlet.class

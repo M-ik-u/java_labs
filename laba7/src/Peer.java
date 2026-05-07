@@ -1,17 +1,2 @@
-public class Peer {
-    private final String name;
-    private final String address;
-
-    public Peer(String name, String address) {
-        this.name = name;
-        this.address = address;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
+public record Peer(String name, String address) {
 }
