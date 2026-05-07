@@ -50,6 +50,6 @@
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>view.htm</welcome-file>
+        <welcome-file>login.do</welcome-file>
     </welcome-file-list>
 </web-app>

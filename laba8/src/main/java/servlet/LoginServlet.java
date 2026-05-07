@@ -76,7 +76,7 @@ public class LoginServlet extends ChatServlet {
             pw.println("<p><font color='red'>" + errorMessage + "</font></p>");
         }
 
-        pw.println("<form action='/chat/' method='post'>");
+        pw.println("<form action='" + request.getContextPath() + "/' method='post'>");
         pw.println("Введите имя: <input type='text' name='name' value=''>");
         pw.println("<input type='submit' value='Войти в чат'>");
         pw.println("</form></body></html>");
@@ -87,6 +87,11 @@ public class LoginServlet extends ChatServlet {
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
+
+        System.out.println("=== LOGIN doPost ENTER ===");
+        System.out.println("Request URI: " + request.getRequestURI());
+        System.out.println("ContextPath: " + request.getContextPath());
+        System.out.println("Name param: " + request.getParameter("name"));
 
         request.setCharacterEncoding("UTF-8");
 
@@ -105,16 +110,24 @@ public class LoginServlet extends ChatServlet {
 
         request.getSession().setAttribute("name", null);
         request.getSession().setAttribute("error", errorMessage);
-        response.sendRedirect(response.encodeRedirectURL("/chat/"));
+        response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
     }
 
     private String processLogonAttempt(String name,
                                        HttpServletRequest request,
                                        HttpServletResponse response) throws IOException {
 
+        System.out.println("=== processLogonAttempt ENTER ===");
+        System.out.println("Login name = " + name);
         String sessionId = request.getSession().getId();
+        System.out.println("Session ID = " + sessionId);
         ChatUser aUser = activeUsers.get(name);
+        System.out.println("User from map before create = " + aUser);
+
+        //String sessionId = request.getSession().getId();
+        //ChatUser aUser = activeUsers.get(name);
         boolean isNewUser = false;
+
 
         if (aUser == null) {
             aUser = new ChatUser(name,
@@ -125,8 +138,19 @@ public class LoginServlet extends ChatServlet {
                 activeUsers.put(aUser.getName(), aUser);
             }
 
+            System.out.println("NEW USER CREATED: " + aUser.getName());
+            System.out.println("NEW USER SESSION ID: " + aUser.getSessionId());
+
             isNewUser = true;
         }
+
+        System.out.println("aUser.getSessionId() = " + aUser.getSessionId());
+        System.out.println("sessionId = " + sessionId);
+        System.out.println("equals = " + aUser.getSessionId().equals(sessionId));
+        System.out.println("timeout check = " +
+                (aUser.getLastInteractionTime() <
+                        (Calendar.getInstance().getTimeInMillis() - sessionTimeout * 1000L)));
+
 
         if (aUser.getSessionId().equals(sessionId) ||
                 aUser.getLastInteractionTime() <
@@ -134,6 +158,9 @@ public class LoginServlet extends ChatServlet {
 
             request.getSession().setAttribute("name", name);
             aUser.setLastInteractionTime(Calendar.getInstance().getTimeInMillis());
+
+            System.out.println("=== SUCCESS BRANCH ===");
+            System.out.println("About to add cookie sessionId");
 
             Cookie sessionIdCookie = new Cookie("sessionId", sessionId);
             sessionIdCookie.setPath(request.getContextPath().isEmpty() ? "/" : request.getContextPath());
@@ -152,7 +179,7 @@ public class LoginServlet extends ChatServlet {
                 }
             }
 
-            response.sendRedirect(response.encodeRedirectURL("/chat/view.htm"));
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/view.htm"));
             return null;
         }
 
