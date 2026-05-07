@@ -7,7 +7,7 @@
 
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>bsu.rfe.java.teacher.servlet.LoginServlet</servlet-class>
+        <servlet-class>servlet.LoginServlet</servlet-class>
         <init-param>
             <param-name>SESSION_TIMEOUT</param-name>
             <param-value>3600</param-value>
@@ -21,7 +21,7 @@
 
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>bsu.rfe.java.teacher.servlet.LogoutServlet</servlet-class>
+        <servlet-class>servlet.LogoutServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -31,7 +31,7 @@
 
     <servlet>
         <servlet-name>MessageListServlet</servlet-name>
-        <servlet-class>bsu.rfe.java.teacher.servlet.MessageListServlet</servlet-class>
+        <servlet-class>servlet.MessageListServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -41,7 +41,7 @@
 
     <servlet>
         <servlet-name>NewMessageServlet</servlet-name>
-        <servlet-class>bsu.rfe.java.teacher.servlet.NewMessageServlet</servlet-class>
+        <servlet-class>servlet.NewMessageServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -50,6 +50,6 @@
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>login.do</welcome-file>
+        <welcome-file>view.htm</welcome-file>
     </welcome-file-list>
 </web-app>

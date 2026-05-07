@@ -34,6 +34,5 @@ public class NewMessageServlet extends ChatServlet {
             }
         }
 
-        response.sendRedirect("/chat/composemessage.htm");
-    }
+        response.sendRedirect(request.getContextPath() + "/composemessage.htm");    }
 }
