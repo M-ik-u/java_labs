@@ -32,6 +32,7 @@ public class LoginServlet extends ChatServlet {
                          HttpServletResponse response) throws ServletException, IOException {
 
         String name = (String) request.getSession().getAttribute("name");
+        System.out.println("Name before login " + name);
         String errorMessage = (String) request.getSession().getAttribute("error");
         String previousSessionId = null;
 
@@ -135,6 +136,7 @@ public class LoginServlet extends ChatServlet {
             aUser.setLastInteractionTime(Calendar.getInstance().getTimeInMillis());
 
             Cookie sessionIdCookie = new Cookie("sessionId", sessionId);
+            sessionIdCookie.setPath(request.getContextPath().isEmpty() ? "/" : request.getContextPath());
             sessionIdCookie.setMaxAge(60 * 60 * 24 * 365);
             response.addCookie(sessionIdCookie);
 

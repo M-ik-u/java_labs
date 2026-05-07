@@ -31,12 +31,12 @@ public class LogoutServlet extends ChatServlet {
                 cookie.setMaxAge(0);
                 response.addCookie(cookie);
 
-                response.sendRedirect(response.encodeRedirectURL("/chat/"));
+                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
             } else {
-                response.sendRedirect(response.encodeRedirectURL("/chat/view.htm"));
+                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/view.htm"));
             }
         } else {
-            response.sendRedirect(response.encodeRedirectURL("/chat/view.htm"));
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/view.htm"));
         }
     }
 }

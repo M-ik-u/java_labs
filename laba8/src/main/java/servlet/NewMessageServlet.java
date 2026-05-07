@@ -16,13 +16,17 @@ public class NewMessageServlet extends ChatServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
 
+        System.out.println("Message had been sent");
         request.setCharacterEncoding("UTF-8");
 
         String message = request.getParameter("message");
 
+        System.out.println("message = " + message + request.getSession().getAttribute("name"));
+
         if (message != null && !"".equals(message.trim())) {
             ChatUser author = activeUsers.get((String) request.getSession().getAttribute("name"));
 
+            System.out.println("Author had been initilized " + author);
             if (author != null) {
                 synchronized (messages) {
                     messages.add(new ChatMessage(
@@ -34,5 +38,6 @@ public class NewMessageServlet extends ChatServlet {
             }
         }
 
-        response.sendRedirect(request.getContextPath() + "/composemessage.htm");    }
+        response.sendRedirect(request.getContextPath() + "/composemessage.htm");
+    }
 }

@@ -20,7 +20,7 @@ public class MessageListServlet extends ChatServlet {
 
         pw.println("<html><head>"
                 + "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>"
-                + "<meta http-equiv='refresh' content='10'>"
+                + "<meta http-equiv='refresh' content='2'/>"
                 + "</head><body>");
 
         for (int i = messages.size() - 1; i >= 0; i--) {
